@@ -4,5 +4,15 @@ CREATE TABLE users (
   role varchar(50) NOT NULL,
   password varchar(50) DEFAULT NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY UK_username (username)
+  UNIQUE KEY UK_username (login)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE news (
+  id bigint(20) NOT NULL AUTO_INCREMENT,
+  user_id bigint(20) NOT NULL,
+  title varchar(100) NOT NULL,
+  content varchar(255) NOT NULL,
+  create_date timestamp(6) NOT NULL,
+  content pic_url(255) NOT NULL,
+  PRIMARY KEY (id),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

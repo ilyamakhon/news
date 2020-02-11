@@ -15,8 +15,9 @@ import java.util.Date;
 @Table(name = "news")
 public class News {
     private Long id;
+    private Long userID;
     private String title;
     private String content;
-    private Date date;
+    private Date create_date;
     private String picURL;
 }
