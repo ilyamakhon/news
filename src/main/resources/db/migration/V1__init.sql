@@ -13,6 +13,6 @@ CREATE TABLE news (
   title varchar(100) NOT NULL,
   content varchar(255) NOT NULL,
   create_date timestamp(6) NOT NULL,
-  content pic_url(255) NOT NULL,
-  PRIMARY KEY (id),
+  pic_url varchar(255) NOT NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
