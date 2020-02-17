@@ -1,6 +1,6 @@
 package by.makhon.webapp.controller;
 
-import by.makhon.webapp.domain.User;
+import by.makhon.webapp.model.User;
 import by.makhon.webapp.exception.ResourceNotFoundException;
 import by.makhon.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
