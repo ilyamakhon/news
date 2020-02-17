@@ -1,9 +1,11 @@
-package by.makhon.webapp.news;
+package by.makhon.webapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class NewsApplication {
 
 	public static void main(String[] args) {
