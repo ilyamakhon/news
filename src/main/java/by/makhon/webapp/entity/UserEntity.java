@@ -1,21 +1,20 @@
-package by.makhon.webapp.model;
+package by.makhon.webapp.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Component
-@Getter
-@Setter
+@Data
+@Accessors(chain = true)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +25,14 @@ public class User {
     @Size(min = 1, max = 20)
     private String login;
 
-    @NotBlank
+    @NotNull
     @Column
     @Size(min = 1, max = 20)
     private String role;
 
-    @NotBlank
+    @NotNull
     @Column
     @Size(min = 1, max = 20)
     private String password;
+
 }

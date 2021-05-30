@@ -1,6 +1,6 @@
 package by.makhon.webapp.controller;
 
-import by.makhon.webapp.model.User;
+import by.makhon.webapp.entity.UserEntity;
 import by.makhon.webapp.exception.ResourceNotFoundException;
 import by.makhon.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +18,38 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    private List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
+    private UserEntity getUserById(@PathVariable("id") Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     }
 
     @PostMapping
-    public User createUser(@Valid @RequestBody User user) {
-        return userRepository.save(user);
+    private UserEntity createUser(@Valid @RequestBody UserEntity userEntity) {
+        return userRepository.save(userEntity);
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable("id") Long userID,
-                           @Valid @RequestBody User userDetails) {
-        User user = userRepository.findById(userID)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userID));
+    @PutMapping
+    private UserEntity updateUser(@Valid @RequestBody UserEntity userEntityToUpdate) {
+        UserEntity userEntity = userRepository.findById(userEntityToUpdate.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userEntityToUpdate.getId()))
+                .setLogin(userEntityToUpdate.getLogin())
+                .setPassword(userEntityToUpdate.getPassword())
+                .setRole(userEntityToUpdate.getRole());
 
-        user.setLogin(userDetails.getLogin());
-        user.setPassword(userDetails.getPassword());
-        user.setRole(userDetails.getRole());
-
-        return user;
+        return userRepository.save(userEntity);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") Long userID) {
-        User user = userRepository.findById(userID)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userID));
+    private ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
-        userRepository.delete(user);
+        userRepository.delete(userEntity);
 
         return ResponseEntity.ok().build();
     }

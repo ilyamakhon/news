@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/comments")
 public class CommentController {
     @Autowired
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
 }
